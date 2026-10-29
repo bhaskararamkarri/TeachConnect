@@ -1,0 +1,191 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  name          String
+  role          String         @default("BUYER") // "BUYER", "SELLER", "SCHOOL_ADMIN", "ADMIN"
+  avatarUrl     String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  
+  sellerProfile SellerProfile?
+  orders        Order[]
+  library       LibraryItem[]
+  reviews       Review[]
+  wishlists     WishlistItem[]
+}
+
+model SellerProfile {
+  id             String      @id @default(uuid())
+  userId         String      @unique
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  storeName      String      @unique
+  storeSlug      String      @unique
+  tagline        String?
+  bio            String?
+  bannerUrl      String?
+  avatarUrl      String?
+  tier           String      @default("EXCLUSIVE") // "BASIC" (55% payout), "EXCLUSIVE" (77.5% payout)
+  stripeAccountId String?
+  ratingAverage  Float       @default(0.0)
+  ratingCount    Int         @default(0)
+  totalSales     Int         @default(0)
+  totalEarningsCents Int     @default(0)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  
+  products       Product[]
+  payouts        Payout[]
+}
+
+model Payout {
+  id               String        @id @default(uuid())
+  sellerId         String
+  seller           SellerProfile @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  amountCents      Int
+  status           String        @default("PAID") // "PENDING", "PROCESSING", "PAID"
+  payoutPeriod     String        // e.g. "October 2026"
+  transferRef      String?
+  paidAt           DateTime      @default(now())
+  createdAt        DateTime      @default(now())
+}
+
+model Product {
+  id                 String            @id @default(uuid())
+  sellerId           String
+  seller             SellerProfile     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  title              String
+  slug               String            @unique
+  description        String
+  priceCents         Int               // in cents (e.g. 499 for $4.99, 0 for free)
+  isFree             Boolean           @default(false)
+  gradeLevels        String            // JSON serialized array: e.g. '["Kindergarten","1st Grade"]'
+  subjects           String            // JSON serialized array: e.g. '["Math","Geometry"]'
+  resourceTypes      String            // JSON serialized array: e.g. '["Worksheets","Printables"]'
+  pageCount          Int               @default(1)
+  fileFormats        String            // e.g. "PDF, Google Slides"
+  isEaselReady       Boolean           @default(false)
+  standardsAlignment String?           // JSON serialized array of standard codes
+  totalDownloads     Int               @default(0)
+  ratingAverage      Float             @default(0.0)
+  ratingCount        Int               @default(0)
+  coverImageUrl      String
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  
+  files              ProductFile[]
+  previews           ProductPreview[]
+  orderItems         OrderItem[]
+  reviews            Review[]
+}
+
+model ProductFile {
+  id             String    @id @default(uuid())
+  productId      String
+  product        Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  fileName       String
+  fileSize       Int       // bytes
+  mimeType       String
+  fileKey        String    // Mock or S3 path/token
+  fileType       String    @default("MAIN_DOWNLOAD") // "MAIN_DOWNLOAD", "ANSWER_KEY", "SUPPLEMENTAL"
+  createdAt      DateTime  @default(now())
+}
+
+model ProductPreview {
+  id             String    @id @default(uuid())
+  productId      String
+  product        Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  previewUrl     String
+  pageNumber     Int
+  sortOrder      Int       @default(0)
+  watermarkText  String    @default("TEACHCONNECT PREVIEW - FOR EVALUATION ONLY")
+}
+
+model Order {
+  id               String      @id @default(uuid())
+  userId           String
+  user             User        @relation(fields: [userId], references: [id])
+  orderNumber      String      @unique
+  totalAmountCents Int
+  discountCents    Int         @default(0)
+  taxCents         Int         @default(0)
+  status           String      @default("COMPLETED") // "PENDING", "COMPLETED", "REFUNDED"
+  paymentMethod    String      @default("STRIPE_CARD") // "STRIPE_CARD", "FREE_ORDER", "SCHOOL_PO"
+  createdAt        DateTime    @default(now())
+  
+  items            OrderItem[]
+}
+
+model OrderItem {
+  id                 String       @id @default(uuid())
+  orderId            String
+  order              Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId          String
+  product            Product      @relation(fields: [productId], references: [id])
+  priceCents         Int
+  licenseType        String       @default("SINGLE_USER") // "SINGLE_USER", "SCHOOL_SEAT"
+  seatCount          Int          @default(1)
+  sellerShareCents   Int
+  platformShareCents Int
+  createdAt          DateTime     @default(now())
+}
+
+model LibraryItem {
+  id               String       @id @default(uuid())
+  userId           String
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId        String
+  productTitle     String
+  productSlug      String
+  sellerStoreName  String
+  coverImageUrl    String
+  licenseType      String       @default("SINGLE_USER")
+  downloadCount    Int          @default(0)
+  lastDownloadedAt DateTime?
+  downloadToken    String       @unique @default(uuid())
+  tokenExpiresAt   DateTime?
+  createdAt        DateTime     @default(now())
+}
+
+model Review {
+  id             String    @id @default(uuid())
+  productId      String
+  product        Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userName       String
+  rating         Int       // 1 - 5
+  comment        String
+  gradeTaught    String?
+  helpfulVotes   Int       @default(0)
+  createdAt      DateTime  @default(now())
+
+  @@unique([productId, userId])
+}
+
+model WishlistItem {
+  id             String    @id @default(uuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId      String
+  createdAt      DateTime  @default(now())
+
+  @@unique([userId, productId])
+}
+
+model EducationalStandard {
+  id             String    @id @default(uuid())
+  code           String    @unique // e.g., "CCSS.MATH.CONTENT.5.NF.A.1"
+  framework      String    // "CCSS", "TEKS", "NGSS"
+  subject        String    // "Math", "ELA", "Science"
+  grade          String    // "Grade 5", "Kindergarten"
+  description    String
+}
