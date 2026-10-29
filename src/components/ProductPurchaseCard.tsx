@@ -55,7 +55,6 @@ export function ProductPurchaseCard({
   const isInCart = items.some((item) => item.productId === productId);
 
   // Calculate price based on licenses
-  // School licenses get 15% off additional seats
   const calculateTotal = () => {
     if (isFree) return 0;
     if (licenseType === "SCHOOL_SEAT" && seatCount > 1) {
@@ -96,31 +95,31 @@ export function ProductPurchaseCard({
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-gray-200/90 p-6 shadow-sm space-y-6 sticky top-24">
+    <div className="bg-[#FAF7EE] rounded-3xl border border-[#A38345]/30 p-6 shadow-md space-y-6 sticky top-24">
       {/* Price Header */}
       <div>
         <div className="flex items-baseline justify-between">
-          <span className="text-3xl font-black text-gray-900">
+          <span className="text-3xl font-serif font-black text-[#28291F]">
             {formatPrice(totalPriceCents)}
           </span>
           {isFree && (
-            <span className="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">
-              Free Download
+            <span className="px-3 py-1 bg-[#9CA763] text-[#28291F] text-xs font-serif font-bold rounded-lg border border-[#4F5B32]/20">
+              Complimentary
             </span>
           )}
         </div>
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs font-serif text-[#555745] mt-1">
           {licenseType === "SINGLE_USER"
-            ? "Single teacher classroom license"
-            : `${seatCount} transferable school teacher license seats`}
+            ? "Single educator classroom license"
+            : `${seatCount} transferable school department license seats`}
         </p>
       </div>
 
       {/* License Selector (if not free) */}
       {!isFree && (
-        <div className="space-y-3 pt-3 border-t border-gray-100">
-          <h4 className="text-xs font-bold uppercase text-gray-700 tracking-wider">
-            Choose License Type
+        <div className="space-y-3 pt-3 border-t border-[#F1E8C7]">
+          <h4 className="text-xs font-serif font-bold uppercase text-[#4F5B32] tracking-wider">
+            Select Scholastic License
           </h4>
 
           <div className="space-y-2">
@@ -130,10 +129,10 @@ export function ProductPurchaseCard({
                 setLicenseType("SINGLE_USER");
                 setSeatCount(1);
               }}
-              className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition ${
+              className={`flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition ${
                 licenseType === "SINGLE_USER"
-                  ? "border-primary-500 bg-primary-50/50"
-                  : "border-gray-200 hover:bg-gray-50"
+                  ? "border-[#4F5B32] bg-[#F1E8C7]/70 shadow-2xs"
+                  : "border-[#A38345]/30 bg-[#FAF7EE] hover:bg-[#F1E8C7]/40"
               }`}
             >
               <input
@@ -141,14 +140,14 @@ export function ProductPurchaseCard({
                 name="license"
                 checked={licenseType === "SINGLE_USER"}
                 onChange={() => {}}
-                className="mt-1 text-primary-600 focus:ring-primary-500"
+                className="mt-1 text-[#4F5B32] focus:ring-[#4F5B32]"
               />
-              <div className="text-xs">
-                <span className="font-bold text-gray-900 flex items-center gap-1">
-                  <UserCheck className="w-3.5 h-3.5 text-primary-700" /> Individual Classroom License
+              <div className="text-xs font-serif">
+                <span className="font-bold text-[#28291F] flex items-center gap-1.5">
+                  <UserCheck className="w-3.5 h-3.5 text-[#4F5B32]" /> Individual Classroom Folio
                 </span>
-                <p className="text-gray-500 mt-0.5">
-                  For use by one educator in their personal classroom.
+                <p className="text-[#555745] mt-0.5">
+                  For use by one master educator in their personal classroom archive.
                 </p>
               </div>
             </label>
@@ -156,10 +155,10 @@ export function ProductPurchaseCard({
             {/* School / Multi-Seat Option */}
             <label
               onClick={() => setLicenseType("SCHOOL_SEAT")}
-              className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition ${
+              className={`flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition ${
                 licenseType === "SCHOOL_SEAT"
-                  ? "border-primary-500 bg-primary-50/50"
-                  : "border-gray-200 hover:bg-gray-50"
+                  ? "border-[#4F5B32] bg-[#F1E8C7]/70 shadow-2xs"
+                  : "border-[#A38345]/30 bg-[#FAF7EE] hover:bg-[#F1E8C7]/40"
               }`}
             >
               <input
@@ -167,44 +166,44 @@ export function ProductPurchaseCard({
                 name="license"
                 checked={licenseType === "SCHOOL_SEAT"}
                 onChange={() => {}}
-                className="mt-1 text-primary-600 focus:ring-primary-500"
+                className="mt-1 text-[#4F5B32] focus:ring-[#4F5B32]"
               />
-              <div className="text-xs flex-1">
+              <div className="text-xs font-serif flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-gray-900 flex items-center gap-1">
-                    <School className="w-3.5 h-3.5 text-blue-600" /> Multi-Seat School License
+                  <span className="font-bold text-[#28291F] flex items-center gap-1.5">
+                    <School className="w-3.5 h-3.5 text-[#A38345]" /> Multi-Seat Department License
                   </span>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] font-bold text-[#3B4425] bg-[#E4E8D2] px-2 py-0.5 rounded border border-[#9CA763]">
                     Save 15%
                   </span>
                 </div>
-                <p className="text-gray-500 mt-0.5">
-                  School-owned, transferable across grade-level teams or departments.
+                <p className="text-[#555745] mt-0.5">
+                  Institutionally owned, transferable across grade-level colleagues.
                 </p>
 
                 {/* Seat Stepper */}
                 {licenseType === "SCHOOL_SEAT" && (
-                  <div className="mt-3 flex items-center gap-3 pt-2 border-t border-gray-100">
-                    <span className="font-medium text-gray-700">Teacher Seats:</span>
-                    <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+                  <div className="mt-3 flex items-center gap-3 pt-2.5 border-t border-[#A38345]/20">
+                    <span className="font-semibold text-[#28291F]">Teacher Seats:</span>
+                    <div className="flex items-center border border-[#A38345]/40 rounded-xl overflow-hidden bg-[#FAF7EE]">
                       <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           setSeatCount((c) => Math.max(1, c - 1));
                         }}
-                        className="px-2.5 py-1 bg-gray-50 hover:bg-gray-100 font-bold text-gray-600"
+                        className="px-3 py-1 bg-[#F1E8C7] hover:bg-[#e4d9b0] font-bold text-[#28291F]"
                       >
                         -
                       </button>
-                      <span className="px-3 py-1 font-bold text-gray-900">{seatCount}</span>
+                      <span className="px-3.5 py-1 font-bold text-[#28291F]">{seatCount}</span>
                       <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           setSeatCount((c) => c + 1);
                         }}
-                        className="px-2.5 py-1 bg-gray-50 hover:bg-gray-100 font-bold text-gray-600"
+                        className="px-3 py-1 bg-[#F1E8C7] hover:bg-[#e4d9b0] font-bold text-[#28291F]"
                       >
                         +
                       </button>
@@ -218,19 +217,19 @@ export function ProductPurchaseCard({
       )}
 
       {/* Action Buttons */}
-      <div className="space-y-2.5 pt-2">
+      <div className="space-y-3 pt-2">
         <button
           onClick={handleAddToCart}
-          className={`w-full py-3.5 px-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition shadow-sm ${
+          className={`w-full py-3.5 px-4 rounded-2xl font-serif font-bold text-sm flex items-center justify-center gap-2 transition shadow-sm border ${
             isInCart
-              ? "bg-primary-50 text-primary-700 border border-primary-300"
-              : "bg-primary-600 hover:bg-primary-700 text-white shadow-primary-200"
+              ? "bg-[#E4E8D2] text-[#3B4425] border-[#9CA763]"
+              : "bg-[#4F5B32] hover:bg-[#3B4425] text-[#FAF7EE] border-[#A38345]/40 shadow-md"
           }`}
         >
           {isInCart ? (
             <>
-              <CheckCircle2 className="w-4 h-4 text-primary-600" />
-              <span>Already in Cart (Add More)</span>
+              <CheckCircle2 className="w-4 h-4 text-[#3B4425]" />
+              <span>In Vault (Add Another)</span>
             </>
           ) : (
             <>
@@ -242,68 +241,68 @@ export function ProductPurchaseCard({
 
         <button
           onClick={handleBuyNow}
-          className="w-full py-3.5 px-4 bg-gray-900 hover:bg-black text-white rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition shadow-sm"
+          className="w-full py-3.5 px-4 bg-[#28291F] hover:bg-black text-[#FAF7EE] rounded-2xl font-serif font-bold text-sm flex items-center justify-center gap-2 transition shadow-md border border-[#A38345]/30"
         >
-          <Zap className="w-4 h-4 text-yellow-400" />
-          <span>{isFree ? "Instant Free Download" : "Buy Now"}</span>
+          <Zap className="w-4 h-4 text-[#A38345]" />
+          <span>{isFree ? "Acquire Complimentary Folio" : "Acquire Now"}</span>
         </button>
       </div>
 
       {/* Resource Spec List */}
-      <div className="pt-4 border-t border-gray-100 space-y-2 text-xs text-gray-600">
+      <div className="pt-4 border-t border-[#F1E8C7] space-y-2.5 text-xs font-serif text-[#555745]">
         <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5 text-gray-500">
-            <FileText className="w-3.5 h-3.5" /> Total Pages:
+          <span className="flex items-center gap-1.5 text-[#555745]">
+            <FileText className="w-3.5 h-3.5 text-[#A38345]" /> Manuscript Length:
           </span>
-          <span className="font-semibold text-gray-900">{pageCount} pages</span>
+          <span className="font-bold text-[#28291F]">{pageCount} folios / pages</span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-gray-500">File Formats:</span>
-          <span className="font-semibold text-gray-900">{fileFormats}</span>
+          <span className="text-[#555745]">Included Formats:</span>
+          <span className="font-bold text-[#28291F]">{fileFormats}</span>
         </div>
         {isEaselReady && (
-          <div className="flex items-center justify-between text-indigo-700 font-medium">
+          <div className="flex items-center justify-between text-[#4F5B32] font-semibold bg-[#E4E8D2]/50 p-2 rounded-xl border border-[#9CA763]/50">
             <span className="flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5" /> Digital Activity:
+              <Sparkles className="w-3.5 h-3.5 text-[#A38345]" /> Digital Assignment:
             </span>
-            <span className="font-bold">Easel by TeachConnect</span>
+            <span className="font-bold">Easel Ready</span>
           </div>
         )}
       </div>
 
       {/* Seller Box */}
-      <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+      <div className="pt-4 border-t border-[#F1E8C7] flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img
             src={sellerAvatarUrl || "https://placehold.co/150"}
             alt={sellerStoreName}
-            className="w-10 h-10 rounded-full object-cover border border-primary-100"
+            className="w-11 h-11 rounded-2xl object-cover border-2 border-[#9CA763]"
           />
           <div>
-            <h4 className="text-xs font-bold text-gray-900 line-clamp-1">{sellerStoreName}</h4>
-            <div className="flex items-center gap-1 text-[11px] text-amber-500 font-bold">
+            <h4 className="text-xs font-serif font-bold text-[#28291F] line-clamp-1">{sellerStoreName}</h4>
+            <div className="flex items-center gap-1 text-[11px] font-serif text-[#A38345] font-bold">
               <span>★ {sellerRating.toFixed(1)}</span>
-              <span className="text-gray-400 font-normal">({sellerRatingCount})</span>
+              <span className="text-[#555745] font-normal">({sellerRatingCount})</span>
             </div>
           </div>
         </div>
 
         <button
           onClick={() => setIsFollowing((f) => !f)}
-          className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
+          className={`px-3.5 py-1.5 rounded-xl text-xs font-serif font-semibold transition border ${
             isFollowing
-              ? "bg-gray-100 text-gray-700"
-              : "bg-primary-50 text-primary-700 hover:bg-primary-100"
+              ? "bg-[#E4E8D2] text-[#3B4425] border-[#9CA763]"
+              : "bg-[#F1E8C7] hover:bg-[#e4d9b0] text-[#28291F] border-[#A38345]/30"
           }`}
         >
-          {isFollowing ? "Following" : "+ Follow"}
+          {isFollowing ? "Following Scholar" : "+ Follow"}
         </button>
       </div>
 
       {/* Trust Notice */}
-      <div className="p-3 bg-gray-50 rounded-xl flex items-center gap-2 text-[11px] text-gray-500">
-        <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-        <span>Instant download after checkout. Verified authentic curriculum.</span>
+      <div className="p-3.5 bg-[#F1E8C7]/50 rounded-2xl flex items-center gap-2.5 text-[11px] font-serif text-[#555745] border border-[#A38345]/20">
+        <ShieldCheck className="w-4 h-4 text-[#4F5B32] flex-shrink-0" />
+        <span>Instant download delivered to your library vault. Peer-reviewed scholarship.</span>
       </div>
     </div>
   );

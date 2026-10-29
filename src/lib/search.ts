@@ -84,3 +84,4 @@ export async function searchProducts(params: SearchParams) {
 
   return products;
 }
+

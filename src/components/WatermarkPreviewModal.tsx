@@ -35,47 +35,47 @@ export function WatermarkPreviewModal({ previews, title }: WatermarkPreviewModal
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="w-full mt-3 py-2 px-4 bg-gray-900 hover:bg-black text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 transition shadow-sm"
+        className="w-full mt-4 py-3 px-4 bg-[#28291F] hover:bg-black text-[#FAF7EE] text-xs font-serif font-bold rounded-2xl flex items-center justify-center gap-2 transition shadow-md border border-[#A38345]/40"
       >
-        <Eye className="w-4 h-4 text-primary-400" />
-        <span>View Watermarked Sample Pages ({previews.length})</span>
+        <Eye className="w-4 h-4 text-[#A38345]" />
+        <span>Inspect Watermarked Manuscript Samples ({previews.length} pages)</span>
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="relative bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-[#28291F]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="relative bg-[#FAF7EE] rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh] border border-[#A38345]/40">
             {/* Modal Header */}
-            <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/80">
+            <div className="p-4.5 border-b border-[#F1E8C7] flex items-center justify-between bg-[#F1E8C7]/60">
               <div>
-                <span className="text-xs font-bold text-primary-700 uppercase tracking-wider">
-                  Sample Preview (Page {currentIndex + 1} of {previews.length})
+                <span className="text-xs font-serif font-bold text-[#4F5B32] uppercase tracking-wider">
+                  Archival Manuscript Sample (Folio {currentIndex + 1} of {previews.length})
                 </span>
-                <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">{title}</h3>
+                <h3 className="text-sm font-serif font-bold text-[#28291F] line-clamp-1">{title}</h3>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-200 transition"
+                className="p-1.5 text-[#555745] hover:text-[#28291F] rounded-full hover:bg-[#F1E8C7] transition"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Preview Image Stage with Watermark Layer */}
-            <div className="flex-1 relative bg-gray-100 flex items-center justify-center overflow-hidden min-h-[420px] select-none">
+            <div className="flex-1 relative bg-[#F1E8C7]/30 flex items-center justify-center overflow-hidden min-h-[420px] select-none p-4">
               {/* The Actual Page Image */}
               <img
                 src={currentPreview.previewUrl}
                 alt={`Preview page ${currentPreview.pageNumber}`}
-                className="max-h-[60vh] w-auto object-contain shadow-lg"
+                className="max-h-[60vh] w-auto object-contain shadow-lg rounded-xl border border-[#A38345]/30 bg-[#FAF7EE]"
               />
 
               {/* Diagonal Watermark Overlay */}
-              <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center rotate-[-25deg] space-y-12 opacity-35">
-                <span className="text-2xl sm:text-4xl font-black text-gray-950 tracking-widest uppercase border-4 border-gray-950 px-6 py-2 rounded-xl">
+              <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center rotate-[-25deg] space-y-12 opacity-30">
+                <span className="text-2xl sm:text-4xl font-serif font-black text-[#28291F] tracking-widest uppercase border-4 border-[#28291F] px-6 py-2 rounded-xl bg-[#FAF7EE]/60 shadow-sm">
                   {currentPreview.watermarkText}
                 </span>
-                <span className="text-xl sm:text-3xl font-black text-gray-950 tracking-widest uppercase">
-                  TEACHCONNECT PREVIEW ONLY
+                <span className="text-xl sm:text-3xl font-serif font-black text-[#28291F] tracking-widest uppercase">
+                  TEACHCONNECT ARCHIVE PREVIEW
                 </span>
               </div>
 
@@ -84,14 +84,14 @@ export function WatermarkPreviewModal({ previews, title }: WatermarkPreviewModal
                 <>
                   <button
                     onClick={handlePrev}
-                    className="absolute left-3 p-2 rounded-full bg-white/80 hover:bg-white text-gray-800 shadow-md transition"
+                    className="absolute left-4 p-2.5 rounded-full bg-[#FAF7EE] hover:bg-[#F1E8C7] text-[#28291F] shadow-md transition border border-[#A38345]/30"
                     aria-label="Previous Page"
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </button>
                   <button
                     onClick={handleNext}
-                    className="absolute right-3 p-2 rounded-full bg-white/80 hover:bg-white text-gray-800 shadow-md transition"
+                    className="absolute right-4 p-2.5 rounded-full bg-[#FAF7EE] hover:bg-[#F1E8C7] text-[#28291F] shadow-md transition border border-[#A38345]/30"
                     aria-label="Next Page"
                   >
                     <ChevronRight className="w-6 h-6" />
@@ -102,15 +102,15 @@ export function WatermarkPreviewModal({ previews, title }: WatermarkPreviewModal
 
             {/* Thumbnail Strip */}
             {previews.length > 1 && (
-              <div className="p-3 bg-gray-50 border-t border-gray-100 flex items-center justify-center gap-3">
+              <div className="p-3.5 bg-[#F1E8C7]/50 border-t border-[#F1E8C7] flex items-center justify-center gap-3">
                 {previews.map((item, idx) => (
                   <button
                     key={item.id}
                     onClick={() => setCurrentIndex(idx)}
-                    className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition ${
+                    className={`w-14 h-14 rounded-xl overflow-hidden border-2 transition ${
                       currentIndex === idx
-                        ? "border-primary-600 scale-105 shadow-md"
-                        : "border-gray-200 opacity-60 hover:opacity-100"
+                        ? "border-[#4F5B32] scale-105 shadow-md bg-[#FAF7EE]"
+                        : "border-[#A38345]/30 opacity-70 hover:opacity-100 bg-[#FAF7EE]"
                     }`}
                   >
                     <img
@@ -124,14 +124,14 @@ export function WatermarkPreviewModal({ previews, title }: WatermarkPreviewModal
             )}
 
             {/* Footer Notice */}
-            <div className="px-4 py-2.5 bg-gray-100/90 border-t border-gray-200 flex items-center justify-between text-[11px] text-gray-500">
-              <span className="flex items-center gap-1.5 text-gray-700">
-                <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
-                <span>Protected by TeachConnect Digital Rights Management. Full un-watermarked high-res files delivered upon purchase.</span>
+            <div className="px-5 py-3 bg-[#F1E8C7]/80 border-t border-[#F1E8C7] flex items-center justify-between text-[11px] font-serif text-[#555745]">
+              <span className="flex items-center gap-1.5 text-[#28291F]">
+                <ShieldAlert className="w-3.5 h-3.5 text-[#A38345]" />
+                <span>Protected by TeachConnect Scholastic DRM. Unaltered high-resolution PDFs delivered upon acquisition.</span>
               </span>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-xs font-semibold text-primary-700 hover:text-primary-800"
+                className="text-xs font-serif font-bold text-[#4F5B32] hover:text-[#3B4425]"
               >
                 Close Preview
               </button>

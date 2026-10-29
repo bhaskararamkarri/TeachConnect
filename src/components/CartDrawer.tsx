@@ -16,47 +16,47 @@ export function CartDrawer() {
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-[#28291F]/60 backdrop-blur-sm transition-opacity"
         onClick={() => setIsDrawerOpen(false)}
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+        <div className="w-screen max-w-md bg-[#FAF7EE] shadow-2xl flex flex-col border-l border-[#A38345]/30">
           {/* Header */}
-          <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-            <div className="flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5 text-primary-600" />
-              <h2 className="font-semibold text-gray-900 text-lg">Your Cart ({items.length})</h2>
+          <div className="p-5 border-b border-[#F1E8C7] flex items-center justify-between bg-[#F1E8C7]/60">
+            <div className="flex items-center gap-2.5">
+              <ShoppingBag className="w-5 h-5 text-[#4F5B32]" />
+              <h2 className="font-serif font-bold text-[#28291F] text-lg">Curriculum Vault Cart ({items.length})</h2>
             </div>
             <button
               onClick={() => setIsDrawerOpen(false)}
-              className="p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              className="p-1.5 rounded-full text-[#555745] hover:text-[#28291F] hover:bg-[#F1E8C7] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Cart Items List */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-5 space-y-4">
             {items.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center text-center p-6 text-gray-500">
-                <ShoppingBag className="w-12 h-12 text-gray-300 mb-3" />
-                <p className="text-base font-medium text-gray-800">Your cart is empty</p>
-                <p className="text-sm text-gray-500 mt-1 mb-6">Explore teacher-created lessons and printables to get started.</p>
+              <div className="h-full flex flex-col items-center justify-center text-center p-6 text-[#555745]">
+                <ShoppingBag className="w-12 h-12 text-[#A38345]/50 mb-3" />
+                <p className="text-base font-serif font-bold text-[#28291F]">Your cart vault is empty</p>
+                <p className="text-xs font-serif text-[#555745] mt-1 mb-6">Explore peer-reviewed manuscripts and teacher folios to begin.</p>
                 <button
                   onClick={() => setIsDrawerOpen(false)}
-                  className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition"
+                  className="px-5 py-2.5 bg-[#4F5B32] text-[#FAF7EE] rounded-xl text-xs font-serif font-bold hover:bg-[#3B4425] transition border border-[#A38345]/30 shadow-xs"
                 >
-                  Browse Resources
+                  Explore Catalog
                 </button>
               </div>
             ) : (
               items.map((item) => (
                 <div
                   key={item.productId}
-                  className="flex gap-3 p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-gray-200 transition"
+                  className="flex gap-3.5 p-4 bg-[#FAF7EE] border border-[#A38345]/30 rounded-2xl shadow-2xs hover:border-[#4F5B32] transition"
                 >
-                  <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-100">
+                  <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-[#F1E8C7] flex-shrink-0 border border-[#A38345]/20">
                     <img
                       src={item.coverImageUrl}
                       alt={item.title}
@@ -68,17 +68,17 @@ export function CartDrawer() {
                     <Link
                       href={`/product/${item.slug}`}
                       onClick={() => setIsDrawerOpen(false)}
-                      className="text-sm font-semibold text-gray-900 line-clamp-2 hover:text-primary-700 transition-colors"
+                      className="text-xs font-serif font-bold text-[#28291F] line-clamp-2 hover:text-[#4F5B32] transition-colors leading-snug"
                     >
                       {item.title}
                     </Link>
-                    <p className="text-xs text-gray-500 mt-0.5">By {item.sellerStoreName}</p>
+                    <p className="text-[11px] font-serif text-[#555745] mt-0.5">By <span className="font-semibold text-[#28291F]">{item.sellerStoreName}</span></p>
 
                     <div className="flex items-center gap-1.5 mt-2">
-                      <span className="text-xs font-medium px-2 py-0.5 bg-gray-100 text-gray-700 rounded-md">
+                      <span className="text-[10px] font-serif font-medium px-2 py-0.5 bg-[#F1E8C7] text-[#28291F] rounded-md border border-[#A38345]/20">
                         {item.licenseType === "SCHOOL_SEAT" ? (
                           <span className="flex items-center gap-1">
-                            <School className="w-3 h-3 text-blue-600" /> School License
+                            <School className="w-3 h-3 text-[#A38345]" /> School Department License
                           </span>
                         ) : (
                           "Classroom License"
@@ -86,30 +86,30 @@ export function CartDrawer() {
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between mt-3">
-                      <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden text-xs">
+                    <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#F1E8C7]">
+                      <div className="flex items-center border border-[#A38345]/40 rounded-xl overflow-hidden text-xs bg-[#F1E8C7]/50">
                         <button
                           onClick={() => updateSeats(item.productId, item.seatCount - 1)}
-                          className="px-2 py-1 bg-gray-50 hover:bg-gray-100 text-gray-600"
+                          className="px-2 py-1 bg-[#F1E8C7] hover:bg-[#e4d9b0] font-bold text-[#28291F]"
                         >
                           -
                         </button>
-                        <span className="px-2.5 py-1 font-medium text-gray-800">{item.seatCount}</span>
+                        <span className="px-2.5 py-1 font-serif font-bold text-[#28291F]">{item.seatCount}</span>
                         <button
                           onClick={() => updateSeats(item.productId, item.seatCount + 1)}
-                          className="px-2 py-1 bg-gray-50 hover:bg-gray-100 text-gray-600"
+                          className="px-2 py-1 bg-[#F1E8C7] hover:bg-[#e4d9b0] font-bold text-[#28291F]"
                         >
                           +
                         </button>
                       </div>
 
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-gray-900">
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-sm font-serif font-extrabold text-[#28291F]">
                           {formatPrice(item.priceCents * item.seatCount)}
                         </span>
                         <button
                           onClick={() => removeFromCart(item.productId)}
-                          className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                          className="p-1 text-[#555745] hover:text-red-700 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -123,21 +123,21 @@ export function CartDrawer() {
 
           {/* Footer / Checkout */}
           {items.length > 0 && (
-            <div className="p-4 border-t border-gray-100 bg-gray-50/70 space-y-3">
-              <div className="flex items-center justify-between text-sm text-gray-600">
-                <span>Subtotal</span>
-                <span className="font-bold text-gray-900 text-base">{formatPrice(subtotalCents)}</span>
+            <div className="p-5 border-t border-[#F1E8C7] bg-[#F1E8C7]/60 space-y-3.5">
+              <div className="flex items-center justify-between text-xs font-serif text-[#555745]">
+                <span>Vault Subtotal</span>
+                <span className="font-serif font-black text-[#28291F] text-lg">{formatPrice(subtotalCents)}</span>
               </div>
-              <div className="flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 p-2 rounded-lg">
-                <ShieldCheck className="w-4 h-4 flex-shrink-0" />
-                <span>Instant Digital Download & Lifetime Access</span>
+              <div className="flex items-center gap-2 text-xs font-serif text-[#3B4425] bg-[#E4E8D2] p-2.5 rounded-xl border border-[#9CA763]">
+                <ShieldCheck className="w-4 h-4 text-[#4F5B32] flex-shrink-0" />
+                <span>Instant library vault delivery & permanent backup</span>
               </div>
               <Link
                 href="/checkout"
                 onClick={() => setIsDrawerOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold shadow-sm transition"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-[#4F5B32] hover:bg-[#3B4425] text-[#FAF7EE] rounded-2xl font-serif font-bold text-sm shadow-md transition border border-[#A38345]/40"
               >
-                <span>Proceed to Checkout</span>
+                <span>Proceed to Scholastic Checkout</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

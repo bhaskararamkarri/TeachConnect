@@ -173,3 +173,4 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
     </div>
   );
 }
+

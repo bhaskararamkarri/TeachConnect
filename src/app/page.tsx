@@ -11,6 +11,9 @@ import {
   Award,
   Layers,
   Search,
+  Scroll,
+  Feather,
+  BookMarked,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -34,141 +37,142 @@ export default async function HomePage() {
   });
 
   return (
-    <div className="space-y-16 pb-20">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-primary-50/80 via-white to-background pt-16 pb-20 border-b border-primary-100/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-100/80 text-primary-800 text-xs font-semibold mb-6 border border-primary-200 shadow-xs">
-            <Sparkles className="w-4 h-4 text-primary-700" />
-            <span>Built by Educators, for Educators</span>
+    <div className="space-y-20 pb-24 bg-[#FAF7EE]">
+      {/* Hero Section - Classic Scholastic Antiquity */}
+      <section className="relative bg-gradient-to-b from-[#F1E8C7]/60 via-[#FAF7EE] to-[#FAF7EE] pt-20 pb-24 border-b border-[#F1E8C7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E4E8D2] text-[#3B4425] text-xs font-serif font-bold mb-6 border border-[#9CA763]/60 shadow-2xs">
+            <Scroll className="w-4 h-4 text-[#A38345]" />
+            <span>Curated by Master Educators & Scholastic Fellows</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight max-w-4xl mx-auto leading-tight">
-            Original teaching resources for every{" "}
-            <span className="text-primary-600 underline decoration-primary-300 decoration-wavy">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black text-[#28291F] tracking-tight max-w-4xl mx-auto leading-[1.15]">
+            Timeless teaching manuscripts for every{" "}
+            <span className="text-[#4F5B32] italic font-normal underline decoration-[#A38345] decoration-wavy">
               grade, subject & standard
             </span>
           </h1>
 
-          <p className="mt-5 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Spend less time planning on Sunday nights. Download peer-reviewed unit plans, decodable readers, science labs, and interactive digital assignments.
+          <p className="mt-6 text-base sm:text-lg font-serif text-[#555745] max-w-2xl mx-auto leading-relaxed">
+            Spend less time planning on Sunday nights. Access peer-reviewed unit folios, decodable manuscripts, science codices, and interactive Easel scholarship.
           </p>
 
           {/* Quick Search Bar */}
-          <div className="mt-8 max-w-2xl mx-auto">
-            <form action="/search" method="GET" className="relative flex items-center shadow-lg rounded-full">
+          <div className="mt-10 max-w-2xl mx-auto">
+            <form action="/search" method="GET" className="relative flex items-center shadow-lg rounded-2xl">
               <input
                 type="text"
                 name="q"
-                placeholder="Search by topic, keyword, or standard (e.g. 5.NF.A.1)..."
-                className="w-full pl-6 pr-32 py-4 rounded-full border-2 border-primary-200 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:border-primary-600 focus:ring-4 focus:ring-primary-100 transition bg-white"
+                placeholder="Search by topic, manuscript keyword, or standard (e.g. 5.NF.A.1)..."
+                className="w-full pl-12 pr-36 py-4.5 rounded-2xl border-2 border-[#A38345]/50 text-sm sm:text-base font-serif text-[#28291F] placeholder-[#555745]/70 focus:outline-none focus:border-[#4F5B32] focus:ring-4 focus:ring-[#E4E8D2] transition bg-[#FAF7EE]"
               />
+              <Search className="w-5 h-5 text-[#A38345] absolute left-4 top-1/2 -translate-y-1/2" />
               <button
                 type="submit"
-                className="absolute right-2 px-6 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-full text-sm flex items-center gap-2 transition shadow-md"
+                className="absolute right-2 px-7 py-3 bg-[#4F5B32] hover:bg-[#3B4425] text-[#FAF7EE] font-serif font-bold rounded-xl text-sm flex items-center gap-2 transition shadow-md border border-[#A38345]/40"
               >
                 <Search className="w-4 h-4" />
                 <span>Search</span>
               </button>
             </form>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs text-gray-500">
-              <span className="font-semibold text-gray-700">Trending searches:</span>
-              <Link href="/search?q=Fractions" className="px-2.5 py-1 bg-white border border-gray-200 rounded-full hover:border-primary-500 hover:text-primary-700 transition">
-                Fractions
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs font-serif text-[#555745]">
+              <span className="font-bold text-[#28291F]">Scholarship trends:</span>
+              <Link href="/search?q=Fractions" className="px-3 py-1 bg-[#F1E8C7]/70 border border-[#A38345]/30 rounded-lg hover:border-[#4F5B32] hover:text-[#4F5B32] transition">
+                Fractions Folio
               </Link>
-              <Link href="/search?q=Phonics" className="px-2.5 py-1 bg-white border border-gray-200 rounded-full hover:border-primary-500 hover:text-primary-700 transition">
+              <Link href="/search?q=Phonics" className="px-3 py-1 bg-[#F1E8C7]/70 border border-[#A38345]/30 rounded-lg hover:border-[#4F5B32] hover:text-[#4F5B32] transition">
                 CVC Phonics
               </Link>
-              <Link href="/search?q=Plate+Tectonics" className="px-2.5 py-1 bg-white border border-gray-200 rounded-full hover:border-primary-500 hover:text-primary-700 transition">
+              <Link href="/search?q=Plate+Tectonics" className="px-3 py-1 bg-[#F1E8C7]/70 border border-[#A38345]/30 rounded-lg hover:border-[#4F5B32] hover:text-[#4F5B32] transition">
                 Plate Tectonics
               </Link>
-              <Link href="/search?price=free" className="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-semibold hover:bg-emerald-100 transition">
-                Freebies
+              <Link href="/search?price=free" className="px-3 py-1 bg-[#E4E8D2] text-[#3B4425] border border-[#9CA763] rounded-lg font-bold hover:bg-[#c8d0a7] transition">
+                Complimentary
               </Link>
             </div>
           </div>
 
           {/* Trust Metrics */}
-          <div className="mt-14 pt-8 border-t border-gray-100 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-left">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">
-                <CheckCircle2 className="w-5 h-5" />
+          <div className="mt-16 pt-10 border-t border-[#F1E8C7] grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto text-left">
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#F1E8C7]/40 border border-[#A38345]/20">
+              <div className="w-10 h-10 rounded-xl bg-[#9CA763]/30 text-[#3B4425] flex items-center justify-center flex-shrink-0 border border-[#9CA763]">
+                <CheckCircle2 className="w-5 h-5 text-[#4F5B32]" />
               </div>
               <div>
-                <p className="text-sm font-bold text-gray-900">100% Educator Verified</p>
-                <p className="text-xs text-gray-500">Crafted by classroom teachers</p>
+                <p className="text-xs font-serif font-bold text-[#28291F]">100% Educator Peer-Reviewed</p>
+                <p className="text-[11px] font-serif text-[#555745]">Crafted by classroom masters</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0">
-                <Layers className="w-5 h-5" />
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#F1E8C7]/40 border border-[#A38345]/20">
+              <div className="w-10 h-10 rounded-xl bg-[#A38345]/20 text-[#6e552d] flex items-center justify-center flex-shrink-0 border border-[#A38345]/40">
+                <Layers className="w-5 h-5 text-[#A38345]" />
               </div>
               <div>
-                <p className="text-sm font-bold text-gray-900">CCSS & State Aligned</p>
-                <p className="text-xs text-gray-500">Mapped to learning standards</p>
+                <p className="text-xs font-serif font-bold text-[#28291F]">CCSS & State Mapped</p>
+                <p className="text-[11px] font-serif text-[#555745]">Aligned with learning standards</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0">
-                <Sparkles className="w-5 h-5" />
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#F1E8C7]/40 border border-[#A38345]/20">
+              <div className="w-10 h-10 rounded-xl bg-[#9CA763]/30 text-[#3B4425] flex items-center justify-center flex-shrink-0 border border-[#9CA763]">
+                <Sparkles className="w-5 h-5 text-[#4F5B32]" />
               </div>
               <div>
-                <p className="text-sm font-bold text-gray-900">Easel Digital Ready</p>
-                <p className="text-xs text-gray-500">1:1 Device & Google Classroom</p>
+                <p className="text-xs font-serif font-bold text-[#28291F]">Easel Digital Manuscript</p>
+                <p className="text-[11px] font-serif text-[#555745]">Ready for 1:1 student devices</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0">
-                <Award className="w-5 h-5" />
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#F1E8C7]/40 border border-[#A38345]/20">
+              <div className="w-10 h-10 rounded-xl bg-[#A38345]/20 text-[#6e552d] flex items-center justify-center flex-shrink-0 border border-[#A38345]/40">
+                <Award className="w-5 h-5 text-[#A38345]" />
               </div>
               <div>
-                <p className="text-sm font-bold text-gray-900">Instant Download</p>
-                <p className="text-xs text-gray-500">Lifetime access & updates</p>
+                <p className="text-xs font-serif font-bold text-[#28291F]">Instant Vault Access</p>
+                <p className="text-[11px] font-serif text-[#555745]">Lifetime library archiving</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Grade Level Categories */}
+      {/* Grade Level Categories - Scholastic Cards */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-8 border-b border-[#F1E8C7] pb-4">
           <div>
-            <h2 className="text-2xl font-black text-gray-900">Browse by Grade Band</h2>
-            <p className="text-sm text-gray-500">Targeted curriculum designed for specific developmental milestones</p>
+            <h2 className="text-2xl font-serif font-black text-[#28291F]">Browse by Scholastic Grade Band</h2>
+            <p className="text-xs font-serif text-[#555745]">Targeted curriculum designed for developmental milestones</p>
           </div>
-          <Link href="/search" className="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1">
-            <span>View All</span>
+          <Link href="/search" className="text-xs font-serif font-bold text-[#4F5B32] hover:text-[#3B4425] flex items-center gap-1">
+            <span>View Complete Index</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
           {[
-            { name: "Pre-K & Kindergarten", grade: "Kindergarten", color: "from-pink-500 to-rose-400", count: "1,240 items" },
-            { name: "1st - 2nd Grade", grade: "1st Grade", color: "from-amber-500 to-orange-400", count: "2,150 items" },
-            { name: "3rd - 5th Grade", grade: "5th Grade", color: "from-emerald-500 to-teal-400", count: "3,890 items" },
-            { name: "Middle School (6-8)", grade: "6th Grade", color: "from-blue-500 to-indigo-400", count: "1,980 items" },
-            { name: "High School (9-12)", grade: "High School", color: "from-purple-500 to-violet-400", count: "1,450 items" },
+            { name: "Pre-K & Kindergarten", grade: "Kindergarten", count: "1,240 manuscripts" },
+            { name: "1st - 2nd Grade", grade: "1st Grade", count: "2,150 manuscripts" },
+            { name: "3rd - 5th Grade", grade: "5th Grade", count: "3,890 manuscripts" },
+            { name: "Middle School (6-8)", grade: "6th Grade", count: "1,980 manuscripts" },
+            { name: "High School (9-12)", grade: "High School", count: "1,450 manuscripts" },
           ].map((item, idx) => (
             <Link
               key={idx}
               href={`/search?grade=${encodeURIComponent(item.grade)}`}
-              className="group p-5 bg-white border border-gray-200/90 rounded-2xl hover:border-primary-400 hover:shadow-md transition-all flex flex-col justify-between"
+              className="group p-6 bg-[#F1E8C7]/50 border border-[#A38345]/30 rounded-2xl hover:border-[#4F5B32] hover:bg-[#F1E8C7] hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} text-white flex items-center justify-center font-bold text-sm shadow-sm mb-3 group-hover:scale-110 transition-transform`}>
+                <div className="w-11 h-11 rounded-xl bg-[#4F5B32] text-[#FAF7EE] flex items-center justify-center font-serif font-bold text-base shadow-xs mb-4 group-hover:scale-105 transition-transform border border-[#A38345]/40">
                   {idx + 1}
                 </div>
-                <h3 className="font-bold text-gray-900 text-sm group-hover:text-primary-700 transition-colors">
+                <h3 className="font-serif font-bold text-[#28291F] text-sm group-hover:text-[#4F5B32] transition-colors">
                   {item.name}
                 </h3>
               </div>
-              <p className="text-xs text-gray-400 mt-4">{item.count}</p>
+              <p className="text-[11px] font-serif text-[#555745] mt-5">{item.count}</p>
             </Link>
           ))}
         </div>
@@ -176,17 +180,17 @@ export default async function HomePage() {
 
       {/* Featured Resources Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 border-b border-[#F1E8C7] pb-4">
           <div>
             <div className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-primary-600" />
-              <h2 className="text-2xl font-black text-gray-900">Trending Teacher Favorites</h2>
+              <TrendingUp className="w-5 h-5 text-[#4F5B32]" />
+              <h2 className="text-2xl font-serif font-black text-[#28291F]">Acclaimed Teacher Masterpieces</h2>
             </div>
-            <p className="text-sm text-gray-500">Most downloaded units, worksheets, and printables this month</p>
+            <p className="text-xs font-serif text-[#555745]">Most acquired peer-reviewed folios and printables this term</p>
           </div>
           <Link
             href="/search"
-            className="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1"
+            className="text-xs font-serif font-bold text-[#4F5B32] hover:text-[#3B4425] flex items-center gap-1"
           >
             <span>Explore Catalog</span>
             <ArrowRight className="w-4 h-4" />
@@ -215,13 +219,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Featured Teacher-Authors */}
-      <section className="bg-gray-50/70 border-y border-gray-200 py-16">
+      {/* Featured Teacher-Authors - Academic Scholars */}
+      <section className="bg-[#F1E8C7]/50 border-y border-[#F1E8C7] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-2xl font-black text-gray-900">Top Educator Stores</h2>
-            <p className="text-sm text-gray-500 mt-1">
-              Follow peer-recognized Teacher-Authors creating innovative curricula for their own classrooms.
+            <h2 className="text-2xl font-serif font-black text-[#28291F]">Distinguished Educator-Scholars</h2>
+            <p className="text-xs font-serif text-[#555745] mt-2">
+              Follow peer-recognized author-teachers crafting exceptional curriculum for classrooms nationwide.
             </p>
           </div>
 
@@ -229,37 +233,37 @@ export default async function HomePage() {
             {sellers.map((seller) => (
               <div
                 key={seller.id}
-                className="bg-white rounded-2xl border border-gray-200 p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition"
+                className="bg-[#FAF7EE] rounded-3xl border border-[#A38345]/30 p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition"
               >
                 <div>
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-3.5 mb-4">
                     <img
                       src={seller.avatarUrl || "https://placehold.co/150"}
                       alt={seller.storeName}
-                      className="w-14 h-14 rounded-full object-cover border-2 border-primary-100"
+                      className="w-14 h-14 rounded-2xl object-cover border-2 border-[#9CA763]"
                     />
                     <div>
-                      <h3 className="font-bold text-gray-900 text-base">{seller.storeName}</h3>
-                      <p className="text-xs text-primary-700 font-semibold">{seller.tier} Creator</p>
-                      <div className="flex items-center gap-1 text-xs text-amber-500 font-bold mt-0.5">
+                      <h3 className="font-serif font-bold text-[#28291F] text-base">{seller.storeName}</h3>
+                      <p className="text-xs font-serif text-[#4F5B32] font-bold">{seller.tier} Scholar</p>
+                      <div className="flex items-center gap-1 text-xs text-[#A38345] font-bold mt-0.5">
                         <span>★ {seller.ratingAverage.toFixed(1)}</span>
-                        <span className="text-gray-400 font-normal">({seller.ratingCount} reviews)</span>
+                        <span className="text-[#555745] font-normal">({seller.ratingCount} reviews)</span>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
+                  <p className="text-xs font-serif text-[#555745] line-clamp-2 leading-relaxed">
                     {seller.tagline || seller.bio}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
-                  <span className="text-xs text-gray-500">{seller.totalSales} curriculum sales</span>
+                <div className="mt-6 pt-4 border-t border-[#F1E8C7] flex items-center justify-between">
+                  <span className="text-xs font-serif text-[#555745]">{seller.totalSales} scholarship sales</span>
                   <Link
                     href={`/search?seller=${encodeURIComponent(seller.storeName)}`}
-                    className="text-xs font-bold text-primary-600 hover:text-primary-700"
+                    className="text-xs font-serif font-bold text-[#4F5B32] hover:text-[#3B4425]"
                   >
-                    View Store →
+                    View Folios →
                   </Link>
                 </div>
               </div>
@@ -268,31 +272,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Easel Banner */}
+      {/* Easel Banner - Classic Editorial Scholarly Style */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl">
+        <div className="bg-[#4F5B32] rounded-3xl p-8 sm:p-12 text-[#FAF7EE] relative overflow-hidden shadow-xl border border-[#A38345]/40">
           <div className="relative z-10 max-w-2xl">
-            <span className="px-3 py-1 bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 rounded-full text-xs font-semibold uppercase tracking-wider">
-              Easel Interactive Engine
+            <span className="px-3.5 py-1 bg-[#3B4425] text-[#F1E8C7] border border-[#9CA763]/40 rounded-lg text-xs font-serif font-semibold uppercase tracking-wider">
+              Easel Interactive Manuscript Engine
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black mt-4 leading-tight">
-              Turn any printable worksheet into an interactive digital assignment
+            <h2 className="text-3xl sm:text-4xl font-serif font-black mt-4 leading-tight">
+              Transform any printable worksheet into an interactive digital assignment
             </h2>
-            <p className="text-indigo-200 text-sm sm:text-base mt-3 leading-relaxed">
-              Assign interactive lessons directly to Google Classroom. Students type answers into pre-configured boxes, manipulate moveable objects, and receive real-time feedback on their devices.
+            <p className="text-[#E4E8D2] text-sm sm:text-base font-serif mt-3 leading-relaxed">
+              Assign interactive lessons directly to Google Classroom. Students type responses into pre-configured manuscript boxes, manipulate archival pieces, and receive real-time scholastic feedback.
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
               <Link
                 href="/search?format=Easel"
-                className="px-6 py-3 bg-white text-indigo-950 font-bold rounded-xl text-sm hover:bg-indigo-50 transition shadow-sm"
+                className="px-6 py-3 bg-[#FAF7EE] text-[#28291F] font-serif font-bold rounded-xl text-sm hover:bg-[#F1E8C7] transition shadow-sm border border-[#A38345]/30"
               >
-                Browse Easel Ready Activities
+                Browse Easel Ready Manuscripts
               </Link>
               <Link
                 href="/seller/dashboard"
-                className="px-6 py-3 bg-indigo-700/60 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm border border-indigo-500/40 transition"
+                className="px-6 py-3 bg-[#3B4425] hover:bg-[#2d351c] text-[#FAF7EE] font-serif font-bold rounded-xl text-sm border border-[#9CA763]/50 transition"
               >
-                Learn How to Sell
+                Learn Scholar Publishing
               </Link>
             </div>
           </div>

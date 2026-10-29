@@ -11,53 +11,52 @@ import {
   Search,
   ExternalLink,
   ShieldCheck,
-  RefreshCw,
+  Scroll,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function LibraryPage() {
-  // Fetch library items for the primary teacher account
   const items = await prisma.libraryItem.findMany({
     orderBy: { createdAt: "desc" },
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10 bg-[#FAF7EE] min-h-screen">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gray-200 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#F1E8C7] gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-primary-700 uppercase tracking-wider mb-1">
-            <BookOpen className="w-4 h-4" />
-            <span>Digital Assets Vault</span>
+          <div className="flex items-center gap-2 text-xs font-serif font-bold text-[#4F5B32] uppercase tracking-wider mb-1.5">
+            <Scroll className="w-4 h-4 text-[#A38345]" />
+            <span>Personal Scholastic Archive Vault</span>
           </div>
-          <h1 className="text-3xl font-black text-gray-900">My Purchased Library</h1>
-          <p className="text-xs text-gray-500 mt-1">
-            Lifetime access to your acquired teaching files, lesson plans, and updates
+          <h1 className="text-3xl sm:text-4xl font-serif font-black text-[#28291F]">My Library Vault</h1>
+          <p className="text-xs font-serif text-[#555745] mt-1">
+            Lifetime access to your acquired teacher manuscripts, folios, and curriculum updates
           </p>
         </div>
 
         <Link
           href="/search"
-          className="self-start sm:self-auto px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-semibold shadow-xs transition"
+          className="self-start sm:self-auto px-5 py-2.5 bg-[#4F5B32] hover:bg-[#3B4425] text-[#FAF7EE] rounded-xl text-xs font-serif font-bold shadow-sm transition border border-[#A38345]/30"
         >
-          + Find More Resources
+          + Discover More Manuscripts
         </Link>
       </div>
 
       {/* Library Grid */}
       {items.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-gray-200 p-12 text-center space-y-4">
-          <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-400">
-            <BookOpen className="w-6 h-6" />
+        <div className="bg-[#FAF7EE] rounded-3xl border border-[#A38345]/30 p-16 text-center space-y-4 shadow-sm">
+          <div className="w-16 h-16 bg-[#F1E8C7] rounded-2xl flex items-center justify-center mx-auto text-[#4F5B32] border border-[#A38345]/40 shadow-sm">
+            <BookOpen className="w-7 h-7" />
           </div>
-          <h3 className="text-base font-bold text-gray-900">No curriculum in your library yet</h3>
-          <p className="text-xs text-gray-500 max-w-sm mx-auto">
-            Browse teacher-created lesson plans, printables, and assessments to start filling your classroom library.
+          <h3 className="text-lg font-serif font-bold text-[#28291F]">Your library vault is currently empty</h3>
+          <p className="text-xs font-serif text-[#555745] max-w-sm mx-auto leading-relaxed">
+            Browse teacher-created lesson plans, printables, and assessments to start populating your permanent archive.
           </p>
           <Link
             href="/search"
-            className="inline-block px-5 py-2.5 bg-primary-600 text-white rounded-xl text-xs font-semibold hover:bg-primary-700 transition"
+            className="inline-block px-6 py-3 bg-[#4F5B32] text-[#FAF7EE] rounded-xl text-xs font-serif font-bold hover:bg-[#3B4425] transition border border-[#A38345]/30 shadow-md"
           >
             Explore Catalog
           </Link>
@@ -67,40 +66,40 @@ export default async function LibraryPage() {
           {items.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-3xl border border-gray-200 p-6 flex flex-col justify-between shadow-xs hover:border-primary-300 transition"
+              className="bg-[#FAF7EE] rounded-3xl border border-[#A38345]/30 p-6 flex flex-col justify-between shadow-xs hover:border-[#4F5B32] hover:shadow-md transition"
             >
               <div className="flex gap-4">
                 <img
                   src={item.coverImageUrl}
                   alt={item.productTitle}
-                  className="w-24 h-24 rounded-2xl object-cover bg-gray-100 flex-shrink-0 border border-gray-100 shadow-2xs"
+                  className="w-24 h-24 rounded-2xl object-cover bg-[#F1E8C7] flex-shrink-0 border-2 border-[#9CA763] shadow-2xs"
                 />
 
                 <div className="flex-1 min-w-0">
-                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md mb-1.5">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-serif font-bold text-[#3B4425] bg-[#E4E8D2] px-2.5 py-1 rounded-lg mb-2 border border-[#9CA763]">
                     {item.licenseType === "SCHOOL_SEAT" ? (
                       <>
-                        <School className="w-3 h-3 text-blue-600" /> School Multi-Seat
+                        <School className="w-3 h-3 text-[#A38345]" /> School Department License
                       </>
                     ) : (
                       <>
-                        <UserCheck className="w-3 h-3 text-emerald-600" /> Classroom License
+                        <UserCheck className="w-3 h-3 text-[#4F5B32]" /> Classroom License
                       </>
                     )}
                   </span>
 
-                  <h3 className="text-sm font-bold text-gray-900 line-clamp-2 leading-snug">
+                  <h3 className="text-sm font-serif font-bold text-[#28291F] line-clamp-2 leading-snug">
                     {item.productTitle}
                   </h3>
 
-                  <p className="text-xs text-gray-500 mt-1">
-                    By <span className="font-medium text-gray-700">{item.sellerStoreName}</span>
+                  <p className="text-xs font-serif text-[#555745] mt-1">
+                    By <span className="font-semibold text-[#28291F]">{item.sellerStoreName}</span>
                   </p>
 
-                  <div className="flex items-center gap-3 text-[11px] text-gray-400 mt-2">
+                  <div className="flex items-center gap-3 text-[11px] font-serif text-[#555745] mt-2">
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {new Date(item.createdAt).toLocaleDateString()}
+                      <Calendar className="w-3 h-3 text-[#A38345]" />
+                      Acquired {new Date(item.createdAt).toLocaleDateString()}
                     </span>
                     <span>•</span>
                     <span>{item.downloadCount} downloads</span>
@@ -109,11 +108,11 @@ export default async function LibraryPage() {
               </div>
 
               {/* Action Bar */}
-              <div className="pt-4 mt-6 border-t border-gray-100 flex items-center justify-between gap-3">
+              <div className="pt-4 mt-6 border-t border-[#F1E8C7] flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/product/${item.productSlug}`}
-                    className="p-2 text-gray-400 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition"
+                    className="p-2 text-[#555745] hover:text-[#28291F] rounded-xl hover:bg-[#F1E8C7] transition border border-[#A38345]/20"
                     title="View Product Page"
                   >
                     <ExternalLink className="w-4 h-4" />
@@ -127,7 +126,7 @@ export default async function LibraryPage() {
                 <a
                   href={`/api/download/${item.downloadToken}`}
                   download
-                  className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-xs transition"
+                  className="px-4 py-2 bg-[#4F5B32] hover:bg-[#3B4425] text-[#FAF7EE] rounded-xl text-xs font-serif font-bold flex items-center gap-2 shadow-sm transition border border-[#A38345]/30"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Files</span>

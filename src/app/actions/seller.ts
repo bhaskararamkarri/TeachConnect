@@ -96,3 +96,4 @@ export async function createProduct(input: CreateProductInput) {
     return { success: false, error: error.message };
   }
 }
+
